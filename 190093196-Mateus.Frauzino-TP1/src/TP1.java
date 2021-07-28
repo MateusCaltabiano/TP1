@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class TP1 {
 
 	public static void main(String[] args) {
-		int selecao = 0,  quantidadeClientes = 15, quantidadeProdutos = 15, t = 0;
+		int selecao = 0,  quantidadeClientes = 15, quantidadeProdutos = 15, t = 0, clientesCadastrados = 10, produtosCadastrados = 10;
 		int i = 0, selecaoCliente = 0, selecaoProduto = 0, vendaProduto = 0;
 		String buscaCliente = new String(), buscaProduto = new String();
 		char answer;
@@ -52,11 +52,13 @@ public class TP1 {
 			case 1: // New customer
 					System.out.println("Digite a quantidade de clientes a serem cadastrados(máx: 5): ");
 					quantidadeClientes = sc.nextInt();
+					clientesCadastrados += quantidadeClientes;
 					for(i = 10; i < (10 + quantidadeClientes); i++) {
 						System.out.println("Digite o nome do cliente " + (i-9));
 						nome[i] = sc.next();
+						sc.nextLine();
 						System.out.println("Digite o endereço do cliente " + (i-9));
-						endereco[i] = sc.next();
+						endereco[i] = sc.nextLine();
 						System.out.println("Digite o telefone do cliente " + (i-9));
 						telefone[i] = sc.next();
 					}
@@ -97,11 +99,13 @@ public class TP1 {
 			case 3: // New product
 					System.out.println("Digite a quantidade de produtos a serem cadastrados(máx: 5): ");
 					quantidadeProdutos = sc.nextInt();
-					for(i = 0; i < quantidadeProdutos; i++) {
+					produtosCadastrados += quantidadeProdutos;
+					for(i = 10; i < (10 + quantidadeProdutos); i++) {
 						System.out.println("Digite o nome, descrição, valor, porcentagem de lucro e quantidade em estoque do produto "
-								+ (i+1));
+								+ (i-9));
 						nomeProduto[i] = sc.next();
-						descricaoProduto[i] = sc.next();
+						sc.next();
+						descricaoProduto[i] = sc.nextLine();
 						valorProduto[i] = sc.next();
 						lucroProduto[i] = sc.next();
 						estoqueProduto[i] = sc.nextInt();
@@ -133,6 +137,7 @@ public class TP1 {
 								t = 1;
 							}
 							else {
+								t = 1;
 								break;
 							}
 						}
@@ -145,13 +150,13 @@ public class TP1 {
 					break;
 			case 5: // Sale
 					System.out.println("Selecione um cliente:\n");
-					for(i = 0; i < quantidadeClientes; i++) {
+					for(i = 0; i < clientesCadastrados; i++) {
 						System.out.println((i+1) + ". " + nome[i]);
 					}
 					selecaoCliente = sc.nextInt();
 					while (t == 0) {
 						System.out.println("Selecione um produto:\n");
-						for(i = 0; i < quantidadeProdutos; i++) {
+						for(i = 0; i < produtosCadastrados; i++) {
 						System.out.println((i+1) + ". " + nomeProduto[i]);
 						}
 						selecaoProduto = sc.nextInt();
@@ -167,7 +172,7 @@ public class TP1 {
 					
 					break;
 			case 6: System.out.println("Estoque:");
-					for(i = 0; i < quantidadeProdutos; i++) {
+					for(i = 0; i < produtosCadastrados; i++) {
 							System.out.println((i+1) + ". " + nomeProduto[i] + ": " + estoqueProduto[i] + " Unidades.");
 					}
 					
@@ -179,7 +184,7 @@ public class TP1 {
 			default: System.out.println("Opção inválida, reiniciar programa!");
 					 System.exit(0);
 		}
-			
+			System.out.println("\n");
 		} while (selecao != 7);
 		
 		sc.close();
